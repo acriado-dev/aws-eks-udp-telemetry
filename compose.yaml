@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  websocket-server:
+    build:
+      context: ./services/websocket-server
+      dockerfile: Dockerfile
+    hostname: websocket-server
+    environment:
+      WEBSOCKET_PORT: 7868
+    networks:
+      - my-real-time-network
+    ports:
+      - '7868:7868'
+
+  udp-listener:
+    build:
+      context: ./services/udp-listener-service
+      dockerfile: Dockerfile
+    environment:
+      UDP_PORT: 5005
+      WEBSOCKET_SERVER: "ws://websocket-server:7868"
+    networks:
+      - my-real-time-network
+    depends_on:
+      - websocket-server
+    ports:
+      - protocol: udp
+        target: 5005
+        published: 5005
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    restart: unless-stopped
+    networks:
+      - my-real-time-network
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_LOG_LEVEL=debug
+    volumes:
+      - 'grafana_storage:/var/lib/grafana'
+    hostname: grafana
+
+networks:
+  my-real-time-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/24
+
+volumes:
+  grafana_storage:
+
+
