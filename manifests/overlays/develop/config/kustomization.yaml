@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: real-time-udp-telemetry
+resources:
+- ./backend/configmap.yaml
+- real-time-udp-listener/configmap.yaml
+- real-time-websocket-server/configmap.yaml
+
+

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: real-time-websocket-server
+  namespace: real-time-udp-telemetry
+spec:
+  selector:
+    matchLabels:
+      name: real-time-websocket-server
+  template:
+    metadata:
+      labels:
+        name: real-time-websocket-server
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: real-time-websocket-server
+          image: acriadodev/real-time-websocket-server:latest
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 5" ]
+          envFrom:
+            - configMapRef:
+                name: configmap-real-time-websocket-server

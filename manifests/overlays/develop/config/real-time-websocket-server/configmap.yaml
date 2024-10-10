@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-real-time-websocket-server
+  namespace: real-time-udp-telemetry
+data:
+  WEBSOCKET_PORT: "8767"

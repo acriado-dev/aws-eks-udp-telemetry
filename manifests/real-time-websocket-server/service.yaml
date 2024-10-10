@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: real-time-websocket-server-service
+  namespace: real-time-udp-telemetry
+spec:
+  type: NodePort
+  ports:
+    - name: 'tcp-ws-server'
+      protocol: "TCP"
+      port: 8767
+  selector:
+     name: real-time-websocket-server

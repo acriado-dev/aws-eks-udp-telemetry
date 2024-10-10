@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: real-time-udp-listener
+  namespace: real-time-udp-telemetry
+spec:
+  selector:
+    matchLabels:
+      name: real-time-udp-listener
+  template:
+    metadata:
+      labels:
+        name: real-time-udp-listener
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: real-time-udp-listener
+          image: acriadodev/real-time-udp-listener:latest
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 5" ]
+          envFrom:
+            - configMapRef:
+                name: configmap-real-time-udp-listener
+        - name: real-time-udp-listener-sidecar
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          command: ["nginx", "-g", "daemon off;"]
+
