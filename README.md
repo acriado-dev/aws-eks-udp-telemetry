@@ -15,8 +15,10 @@ the F1 2023 PlayStation 4 game. It is designed for scalability, cost-efficiency,
       * [Playstation 4 Configuration](#playstation-4-configuration)
       * [Local Testing](#local-testing)
       * [Option 1. Using docker compose (recommended)](#option-1-using-docker-compose-recommended)
-      * [Option 2. Using docker compose (recommended)](#option-2-using-docker-compose-recommended)
+      * [Option 2. Using Minikube and ArgoCD](#option-2-using-minikube-and-argocd)
   * [Demo / Showcase](#demo--showcase)
+  * [Contributing](#contributing)
+  * [License](#license)
 <!-- TOC -->
 
 ## Overview
@@ -103,8 +105,18 @@ cdk bootstrap aws://<ACCOUNT_ID>/<REGION>
 ```
 cdk deploy --all
 ```
+3. Update kubeconfig to Access to the cluster. One command like the following should appear in the CDK outputs generated:
+```
+aws eks update-kubeconfig --name real-time-platform-cluster-develop --region eu-central-1 --role-arn arn:aws:iam::XXXXXXXX:role/UdpInfraStackeksudpinfrac-realtimeplatformclusterde-ABdLj7XOh4Br --profile amatore-macos
+```
 
-3. Deploy UDP Listener, WebSocket Server, and Grafana by applying the kustomize overlay
+4. Ensure that context of the current created cluster is selected:
+```
+kubectl config get-contexts
+kubectl config view --minify
+```
+
+5. Deploy UDP Listener, WebSocket Server, and Grafana by applying the kustomize overlay
 
 ```
 (base) ~/Documents/GitHub/aws-eks-udp-telemetry/manifests/overlays/develop git:[main]
@@ -117,6 +129,7 @@ service/real-time-udp-listener-service created
 deployment.apps/real-time-udp-listener created
 deployment.apps/real-time-websocket-server created
 ```
+
 4. Configure Network Load Balancer with Elastic IP
    After deployment, configure the NLB to ensure the Elastic IP is associated with the UDP Listener. This setup will route the incoming telemetry data from your PlayStation to the UDP listener pod in the EKS cluster.
 
@@ -133,6 +146,9 @@ To generate and send UDP telemetry data from the F1 2023 game, follow these step
 
 #### Local Testing
 To test the project locally, you have two options:
+
+- Option 1. Using docker compose (recommended)
+- Option 2. Using Minikube and ArgoCD
 
 #### Option 1. Using docker compose (recommended)
 Deploy locally UDP listener, WebSocket server, and Grafana using Docker Compose. You will configure your PlayStation 
@@ -151,7 +167,7 @@ docker-compose -f compose.yaml up
 - Create a custom dashboard with a gauge component to visualize the data source created 
 
 
-#### Option 2. Using docker compose (recommended)
+#### Option 2. Using Minikube and ArgoCD
 Minikube to simulate a Kubernetes environment locally, managed with ArgoCD to sync your local environment with the repository.
 
 - Ensure that Minikube and ArgoCD are installed in your machine
@@ -171,7 +187,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-- Access the ArgoCD dashboard on [http://localhost:8080] with default credentials
+- Access the ArgoCD dashboard on [http://localhost:8080](http://localhost:8080) with default credentials
 - Create and configure this current repository or your forked version in ArgoCD
 - Create a new Application in ArgoCD pointing the repo and the `/manifests/overlays/develop` folder
 - In the Application make sure that your local minikube cluster is the target
@@ -189,3 +205,17 @@ minikube ip
 
 ## Demo / Showcase
 [![](https://img.youtube.com/vi/ILYCQ5PZYwk/0.jpg)](https://www.youtube.com/watch?v=ILYCQ5PZYwk)
+
+## Contributing
+Improve this project through contributions are more than welcomed! To get started, follow the guidelines below:
+
+- Fork the Repository: Fork the repository to your GitHub account and create a local copy.
+- Create a Branch: Create a new branch for your feature or bug fix.
+- Make Changes: Write your code following the project's coding style.
+- Commit and Push: Commit your changes with a descriptive message and push your branch to GitHub.
+- Submit a Pull Request: Open a pull request to the main branch and describe the changes you’ve made.
+
+For detailed contribution guidelines, please see our [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## License
+This project is licensed under the [MIT License](link-to-license-file). See the [LICENSE](LICENSE) file for more details.
