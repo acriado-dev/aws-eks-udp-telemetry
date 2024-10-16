@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: real-time-platform
 resources:
 - deployment.yaml
-#- ingress.yaml
+- persistent-volume.yaml
 - service.yaml
 

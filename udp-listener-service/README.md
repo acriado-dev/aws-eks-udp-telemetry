@@ -32,8 +32,8 @@ docker run -d --name udp-listener-service udp-listener:2
 
 - Tag and publish
 ```
-docker tag udp-listener:2 acriadodev/real-time-udp-listener:develop.0
-docker push acriadodev/real-time-udp-listener:develop.0
+docker tag udp-listener:2 inqidea/real-time-udp-listener:develop.0
+docker push inqidea/real-time-udp-listener:develop.0
 ```
 
 ## Docker (ARM/Linux)
@@ -44,5 +44,5 @@ docker buildx create --use
 
 - Buildx
 ```
-docker buildx build --platform=linux/arm64 -t acriadodev/real-time-udp-listener:develop.1 .
+docker buildx build --platform=linux/arm64 -t inqidea/real-time-udp-listener:develop.1 .
 ```

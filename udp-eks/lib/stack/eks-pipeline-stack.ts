@@ -4,8 +4,7 @@ import {
     AwsLoadBalancerControllerAddOn,
     ClusterAddOn,
     EksBlueprint,
-    GlobalResources,
-    Team
+    GlobalResources, Team
 } from "@aws-quickstart/eks-blueprints";
 import {CapacityType, KubernetesVersion} from "aws-cdk-lib/aws-eks";
 import {InstanceType, SubnetType, Vpc} from "aws-cdk-lib/aws-ec2";
@@ -29,6 +28,7 @@ export default class ClusterConstruct extends Construct {
     realTimeApplicationTeam: RealTimeApplicationTeam;
     realTimePlatformTeam: RealTimePlatformTeam;
     clusterTeams: Team[] = [];
+
 
     constructor(scope: Construct,
                 id: string,

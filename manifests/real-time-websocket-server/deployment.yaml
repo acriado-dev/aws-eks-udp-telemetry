@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: real-time-websocket-server
-  namespace: real-time-udp-telemetry
+  namespace: real-time-platform
 spec:
   selector:
     matchLabels:

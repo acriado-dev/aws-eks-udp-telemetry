@@ -1,16 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: real-time-udp-telemetry
+namespace: real-time-platform
 
 resources:
 - ../../real-time-udp-listener
 - ../../real-time-websocket-server
+- ../../grafana
 - ./config
 
 images:
 - name: acriadodev/real-time-udp-listener
   newName: acriadodev/real-time-udp-listener
-  newTag: develop.0
+  newTag: develop.1
 - name: acriadodev/real-time-websocket-server
   newName: acriadodev/real-time-websocket-server
-  newTag: develop.0
+  newTag: develop.1

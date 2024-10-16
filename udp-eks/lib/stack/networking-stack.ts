@@ -2,6 +2,7 @@ import {Stack, StackProps} from "aws-cdk-lib";
 import {IpAddresses, SubnetType, Vpc} from "aws-cdk-lib/aws-ec2";
 import {Construct} from "constructs";
 
+
 export class NetworkingStack extends Stack {
 
     vpc: Vpc;
@@ -29,6 +30,8 @@ export class NetworkingStack extends Stack {
                     subnetType: SubnetType.PRIVATE_WITH_EGRESS
                 }]
             });
+
+
         }
 
 

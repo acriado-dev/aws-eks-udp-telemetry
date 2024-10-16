@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: configmap-real-time-udp-listener
-  namespace: real-time-udp-telemetry
+  namespace: real-time-platform
 data:
   UDP_PORT: "5005"
   WEBSOCKET_SERVER: "ws://real-time-websocket-server-service:8767"

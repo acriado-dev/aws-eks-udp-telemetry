@@ -1,5 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
-import {Construct} from 'constructs';
+import { Construct } from 'constructs';
 import ClusterConstruct from "./stack/eks-pipeline-stack";
 import {NetworkingStack} from "./stack/networking-stack";
 import {IamStack} from "./stack/iam-stack";
@@ -21,5 +21,8 @@ export class UdpInfraStack extends cdk.Stack {
         iamStack.realTimePlatformUsers,
         networkingStack.vpc,
         {env: envRealTime});
+
+
+
   }
 }

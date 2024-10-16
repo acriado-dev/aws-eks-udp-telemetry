@@ -1,4 +1,4 @@
-import {ArnPrincipal, User} from 'aws-cdk-lib/aws-iam';
+import { ArnPrincipal, User } from 'aws-cdk-lib/aws-iam';
 
 export function getUsersArnPrincipals(users: User[]) {
   const arnPrincipals: ArnPrincipal[] = [];

@@ -1,5 +1,5 @@
-import {PlatformTeam} from '@aws-quickstart/eks-blueprints';
-import {User} from 'aws-cdk-lib/aws-iam';
+import { PlatformTeam } from '@aws-quickstart/eks-blueprints';
+import { User } from 'aws-cdk-lib/aws-iam';
 import {getUsersArnPrincipals} from "../util/iam-utils";
 
 export class RealTimePlatformTeam extends PlatformTeam {

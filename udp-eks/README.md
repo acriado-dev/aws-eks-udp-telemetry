@@ -1,13 +1,16 @@
+
+
+
 ## CDK
 ```
-cdk deploy --profile <profile-name> --all
+cdk deploy --profile amatore-macos --all
 ```
 
 ## EKS
 
 - Update kubeconfig to Access to the cluster:
 ```
-aws eks update-kubeconfig --name real-time-platform-cluster-develop --region eu-central-1 --role-arn <arn:aws:iam::XXXXXXXX:XXXXXX> --profile <profile-name>
+aws eks update-kubeconfig --name real-time-platform-cluster-develop --region eu-central-1 --role-arn arn:aws:iam::XXXXXXXX:role/UdpInfraStackeksudpinfrac-realtimeplatformclusterde-ABdLj7XOh4Br --profile amatore-macos
 ```
 
 - View active context
@@ -27,14 +30,14 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2
 ```
 
 
-## Github SSH key
-
-- Create GitHub SSH key
+### Github SSH key
+- 
+- Create Github SSH key
 ```
-ssh-keygen -t ed25519 -C "hello@amatore.dev"
+ssh-keygen -t ed25519 -C "amatore@gmail.com"
 ```
 
-- Copy public key to GitHub
+- Copy public key to Github
 - Create Secret in ArgoCD mamespace with private key
 ```
 kubectl create secret generic github-ssh-key \

@@ -4,4 +4,5 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY ws-server.js ./
+
 CMD [ "node", "ws-server.js" ]

@@ -2,9 +2,11 @@ import {SecretValue, Stack, StackProps} from "aws-cdk-lib";
 import {Group, ManagedPolicy, User} from "aws-cdk-lib/aws-iam";
 import {Construct} from "constructs";
 
+
 export class IamStack extends Stack {
     readonly realTimeApplicationUsers: User[];
     readonly realTimePlatformUsers: User[];
+
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
@@ -36,6 +38,7 @@ export class IamStack extends Stack {
 
         const usersPlatformList: string[] = JSON.parse(process.env.REAL_TIME_PLATFORM_USERS!);
         this.createIamUsers(usersPlatformList, realTimePlatformTeamGroup, this.realTimePlatformUsers)
+
     }
 
     /**
